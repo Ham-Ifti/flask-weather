@@ -1,6 +1,6 @@
 import weather
 from datetime import datetime
-from flask import Flask
+from flask import Flask, request
 import pandas as pd
 from joblib import load
 from sklearn.metrics import mean_absolute_error, mean_squared_error
@@ -27,9 +27,15 @@ def dashboard():
     metrics["Root Mean Squared Error:"] = round(mse ** 0.5, 3)
     return metrics
 
-@app.route("/predict")
+@app.route("/predict", methods=["GET", "POST"])
 def predict():
+    if request.method == "POST":
+        X = request.get_json()
+        X = [[X["date"], X["temp"], X["temp_min"], X["temp_max"], X["percipitation"], X["wind_deg"], X["wind_speed"], X["pressure"]]]
+        return {"prediction": round(model.predict(X)[0], 3)}
+    
     w = weather.currentWeather(app.config["WEATHERAPI_KEY"])
+    print(w)
     X = [[]]
     X[0].append(int(datetime.now().strftime("%Y%m%d")))
     X[0].append(w["main"]["temp"])
@@ -43,3 +49,4 @@ def predict():
     forecast = {}
     forecast["Tomorrow's Forecast:"] = round(model.predict(X)[0], 3)
     return forecast
+
