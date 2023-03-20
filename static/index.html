@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/sketchy/bootstrap.min.css"
+    />
+    <style>
+      .form-label {
+        font-weight: bold;
+      }
+      .form-control {
+        border: 1px solid black;
+        padding: 0.5rem 1rem;
+      }
+
+      button {
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+    </style>
+    <title>Weather Prediction App</title>
+  </head>
+  <body class="container-fluid">
+    <h1 class="text-center p-4">Weather Prediction App</h1>
+    <div class="row">
+      <div class="col-md-6 p-4">
+        <h2>Enter the weather details to get a prediction:</h2>
+
+        <form id="weatherForm">
+          <div class="row">
+            <div class="col">
+              <label for="date" class="form-label">Date:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="date"
+                name="date"
+                required
+              />
+            </div>
+            <div class="col">
+              <label class="form-label" for="temp">Temperature:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="temp"
+                name="temp"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label" for="temp_min"
+                >Minimum Temperature:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="temp_min"
+                name="temp_min"
+                required
+              />
+            </div>
+            <div class="col">
+              <label class="form-label" for="temp_max"
+                >Maximum Temperature:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="temp_max"
+                name="temp_max"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label" for="percipitation"
+                >Percipitation:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="percipitation"
+                name="percipitation"
+                required
+              />
+            </div>
+            <div class="col">
+              <label class="form-label" for="wind_deg">Wind Degree:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="wind_deg"
+                name="wind_deg"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label" for="wind_speed">Wind Speed:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="wind_speed"
+                name="wind_speed"
+                required
+              />
+            </div>
+            <div class="col">
+              <label class="form-label" for="pressure">Pressure:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="pressure"
+                name="pressure"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit">Predict</button>
+        </form>
+
+        <h2>Prediction Results:</h2>
+        <h3 id="predictionResult"></h3>
+
+        <script>
+          const form = document.getElementById("weatherForm");
+          const predictionResult = document.getElementById("predictionResult");
+
+          form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch("/predict", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            predictionResult.innerText = `Tomorrow's Forecast: ${result.prediction}`;
+          });
+        </script>
+      </div>
+
+      <div class="col-md-6 p-4 text-center">
+        <div class="row p-4">
+          <h2>Forecast:</h2>
+          <h3 id="tomorrowFS"></h3>
+        </div>
+
+        <div class="row p-4">
+          <h2>Model's Metrics</h2>
+          <h4 id="mae"></h4>
+          <h4 id="mse"></h4>
+          <h4 id="rsq"></h4>
+          <h4 id="rmse"></h4>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const tomorrowFS = document.getElementById("tomorrowFS");
+      const mae = document.getElementById("mae");
+      const mse = document.getElementById("mse");
+      const rsq = document.getElementById("rsq");
+      const rmse = document.getElementById("rmse");
+      window.onload = async () => {
+        const response = await fetch("/dashboard");
+        const result = await response.json();
+        mae.innerText = `MAE: ${result.mae}`;
+        mse.innerText = `MSE: ${result.mse}`;
+        rsq.innerText = `R-Squared: ${result.rsq}`;
+        rmse.innerText = `RMSE: ${result.rmse}`;
+
+        const res = await fetch("/predict");
+        const resjs = await res.json();
+        console.log(resjs);
+        tomorrowFS.innerText = `Tomorrow: ${resjs.data}`;
+      };
+    </script>
+  </body>
+</html>
