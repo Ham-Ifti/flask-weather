@@ -8,6 +8,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 model = load("./model-v2.joblib")
 
 app = Flask(__name__)
+app.config.from_object("config.DevelopmentConfig")
 
 @app.route("/")
 def dashboard():
@@ -28,7 +29,7 @@ def dashboard():
 
 @app.route("/predict")
 def predict():
-    w = weather.currentWeather()
+    w = weather.currentWeather(app.config["WEATHERAPI_KEY"])
     X = [[]]
     X[0].append(int(datetime.now().strftime("%Y%m%d")))
     X[0].append(w["main"]["temp"])
