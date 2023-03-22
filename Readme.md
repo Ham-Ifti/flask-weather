@@ -4,15 +4,15 @@ A simple Flask application which gives tommorow's weather forecast for Islamabad
 
 # Screenshots
 ---
-| ![Jenkins](./images/Jenkins.jpg) |
+| ![Jenkins](./Images/Jenkins.jpg) |
 | :--: |
 | *Jenkins* |
 
-| ![Weather App](./images/App.png) |
+| ![Weather App](./Images/App.png) |
 | :--: |
 | *Weather App* |
 
-| ![Github Actions](./images/Actions.png) |
+| ![Github Actions](./Images/Actions.png) |
 | :--: |
 | *GH Actions* |
 
