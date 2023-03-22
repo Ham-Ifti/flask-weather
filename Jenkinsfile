@@ -5,7 +5,7 @@ node {
     // }
     
     stage('Build image') {
-       dockerImage = docker.build("hmzakhalid/weather-app:latest")
+       dockerImage = docker.build("hamzaiftikhar/weather-app:latest")
     }
     
     stage('Push image') {
