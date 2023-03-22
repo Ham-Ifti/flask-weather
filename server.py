@@ -37,7 +37,7 @@ def dashboard():
 def predict():
     if request.method == "POST":
         X = request.get_json()
-        X = [[int(X["date"]), float(X["temp"]), float(X["temp_min"]), float(X["temp_max"]), float(X["percipitation"]), float(X["wind_deg"]), float(X["wind_speed"]), int(X["pressure"])]]
+        X = [[int(datetime.now().strftime("%Y%m%d")), float(X["temp"]), float(X["temp_min"]), float(X["temp_max"]), float(X["percipitation"]), float(X["wind_deg"]), float(X["wind_speed"]), int(X["pressure"])]]
         print(X)
         pred = model.predict(X)[0]
         print(pred)
