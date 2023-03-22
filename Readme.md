@@ -3,9 +3,19 @@
 A simple Flask application which gives tommorow's weather forecast for Islamabad based on current weather.
 
 # Screenshots
-![Jenkins](./images/Jenkins.jpg)
-![Weather App](./images/app.png)
-![Github Actions](./images/Actions.png)
+---
+| ![Jenkins](./images/Jenkins.jpg) |
+| :--: |
+| *Jenkins* |
+
+| ![Weather App](./images/App.png) |
+| :--: |
+| *Weather App* |
+
+| ![Github Actions](./images/Actions.png) |
+| :--: |
+| *GH Actions* |
+
 # Contributors
 ---
 * [Hamza Iftikhar i192003](https://github.com/Ham-Ifti)
