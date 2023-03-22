@@ -1,10 +1,7 @@
 name: Build Python
 
 on:
-  push:
-    branches: [i192003]
-  pull_request:
-    branches: [i192003]
+  [push, pull_request]
 
 jobs:
   build:
