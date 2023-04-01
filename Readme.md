@@ -1,9 +1,7 @@
 # Introduction
----
 A simple Flask application which gives tommorow's weather forecast for Islamabad based on current weather.
 
 # Screenshots
----
 | ![Jenkins](./Images/Jenkins.jpg) |
 | :--: |
 | *Jenkins* |
@@ -17,6 +15,5 @@ A simple Flask application which gives tommorow's weather forecast for Islamabad
 | *GH Actions* |
 
 # Contributors
----
 * [Hamza Iftikhar i192003](https://github.com/Ham-Ifti)
 * [Hamza Khalid i192011](https://github.com/hmzakhalid)
