@@ -15,5 +15,5 @@ A simple Flask application which gives tommorow's weather forecast for Islamabad
 | *GH Actions* |
 
 # Contributors
-* [Hamza Iftikhar i192003](https://github.com/Ham-Ifti)
+* [Hamza Iftikhar i192003](https://github.com/hmzaiftkhar)
 * [Hamza Khalid i192011](https://github.com/hmzakhalid)
